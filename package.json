@@ -1,0 +1,17 @@
+{
+    "name": "simple-chat-app",
+    "version": "1.0.0",
+    "description": "A simple chat app using Node.js and Socket.io",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.17.1",
+      "socket.io": "^4.4.1"
+    },
+    "devDependencies": {},
+    "author": "",
+    "license": "ISC"
+  }
+  
