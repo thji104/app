@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/socket.io@4.4.1/dist/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Simple Chat</h1>
+        <div id="messages"></div>
+        <input type="text" id="messageInput" placeholder="Type a message..."/>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        const socket = io(); // サーバーとの接続
+
+        // メッセージを受信したときの処理
+        socket.on('receive_message', (msg) => {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML += `<p>${msg}</p>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // スクロールを最新メッセージまで
+        });
+
+        // メッセージを送信する関数
+        function sendMessage() {
+            const message = document.getElementById('messageInput').value;
+            socket.emit('send_message', message); // メッセージをサーバーに送る
+            document.getElementById('messageInput').value = ''; // 入力フィールドを空にする
+        }
+    </script>
+</body>
+</html>
